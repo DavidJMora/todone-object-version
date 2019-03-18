@@ -16,38 +16,40 @@ window.onload = init;
 // Set up all event listeners.
 function init() {
     // When they click the add todo button, run `addTodo`.
-
+    document.querySelector('#add-todo')
+        .addEventListener('click', addTodo);
         
     // When they click the clear done todos button, run `clearDoneTodos`.
-
+    document.querySelector('#clear-done-todos')
+        .addEventListener('click', clearDoneTodos);
     
     // When they click the clear all todos button, run `clearAllTodos`.
-
+    document.querySelector('#clear-all-todos')
+        .addEventListener('click', clearAllTodos);
 }
 
 function addTodo(event) {
     // Stop page from reloading on button click.
+    
 
-
-    // Get new todo from the new todo input field.
-
+    // Get new todo's text from the new todo input field.
+    
 
     // Clear the input field of all text.
-
-
+    
+    
     // Put the todo and its "done-ness" in their respective arrays.
-
+    
 
     // Create a new html element and put our new todo's text in there.
-
     
+
     // Add an event listener on the newly created html element to launch
     // `toggleDone` when it's clicked.
-
+    
 
     // Put our new element on the list part of our page!
-
-}
+    
 
 
 function clearAllTodos(event) {
@@ -125,3 +127,4 @@ function removeAllChildrenOfOl() {
     // There are other ways too, though. Feel free to poke around.
 
 }
+
