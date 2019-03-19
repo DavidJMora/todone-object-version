@@ -104,8 +104,13 @@ function clearDoneTodos(event) {
 
         Your call.
     */
-    const completedItem = 
-
+    removeAllChildrenOfOl();
+    for(let i = 0; i < todos.length; i++) {
+    const newLi = document.createElement('li');
+    newLi.innerText = todos[i];
+    const appendElement = document.querySelector('#todo-list');
+    appendElement.appendChild(newLi);
+    }
 }
 
 function toggleDone(event) {
