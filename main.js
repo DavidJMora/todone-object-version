@@ -125,16 +125,16 @@ function toggleDone(event) {
 
 }
 
-function removeAllChildrenOfOl(ol) {
+function removeAllChildrenOfOl() {
     // Grab the ol.
-    while(ol.hasChildNodes()) {
-        ol.removeChild(ol.firstChild);
-    }
-
+    const removeAll = document.querySelector('#todo-list');
     // Remove all its children.
     // The way I like to do that is to continue to remove children as long as
     // there are some to remove.
     // Look at the methods `.hasChildNodes` and `removeChild`.
     // There are other ways too, though. Feel free to poke around.
+    while(removeAll.hasChildNodes()) {
+        removeAll.removeChild(removeAll.firstChild);
+    }
 
 }
