@@ -36,8 +36,10 @@ function addTodo(event) {
     const todoUserInput = document.querySelector('#new-todo').value;
 
     // Put the todo and its "done-ness" in their respective arrays.
-    todos.push(todoUserInput);
-
+    if(todoUserInput.length > 0) {
+        todos.push(todoUserInput);
+        isDone.push(false); 
+    }
     // Clear the input field of all text.
     document.querySelector('#new-todo').value = '';
     
@@ -111,15 +113,16 @@ function toggleDone(event) {
     
     // Grab the HTML element that was clicked.
     // If you don't know, the event parameter has what you need... somewhere.
-
-
+    const elementInnerText = event.target;
+    elementInnerText.style.textDecoration = 'line-through';
+    console.log(elementInnerText);
     // Find the index of the array that this todo resides in. There are a couple
     // ways to do this, and I'm sure you'll figure one out!
-
-
+    const index = todos.indexOf(elementInnerText.innerText);
+    console.log(index);
+    
     // *IF* it's not done yet, apply strikethrough. Otherwise, take that
     // strikethrough away!
-
 
     // Toggle the "done-ness" of the same todo, using the isDone array.
 
