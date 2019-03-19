@@ -47,8 +47,8 @@ function addTodo(event) {
 
     // Add an event listener on the newly created html element to launch
     // `toggleDone` when it's clicked.
-    // document.querySelectorAll(newLi)
-    //     .addEventListener('click', toggleDone);
+    
+    newLi.addEventListener('click', toggleDone);
 
     // Put our new element on the list part of our page!
     const addingToOl = document.querySelector('#todo-list');
