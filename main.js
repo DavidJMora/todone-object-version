@@ -35,19 +35,19 @@ function addTodo(event) {
     // Get new todo's text from the new todo input field.
     const todoUserInput = document.querySelector('#new-todo').value;
 
-    // Clear the input field of all text.
-    clearInput = document.querySelector('#new-todo').value = '';
-    
     // Put the todo and its "done-ness" in their respective arrays.
     todos.push(todoUserInput);
 
+    // Clear the input field of all text.
+    document.querySelector('#new-todo').value = '';
+    
     // Create a new html element and put our new todo's text in there.
     const newLi = document.createElement('li');
     newLi.innerText = todoUserInput;
 
     // Add an event listener on the newly created html element to launch
     // `toggleDone` when it's clicked.
-    // document.querySelector('li')
+    // document.querySelectorAll(newLi)
     //     .addEventListener('click', toggleDone);
 
     // Put our new element on the list part of our page!
@@ -58,10 +58,15 @@ function addTodo(event) {
 
 function clearAllTodos(event) {
     // Stop page from reloading on button click.
-
+    event.preventDefault();
     
     // Remove all todos from BOTH arrays.
-
+    while(todos.length > 0) {
+        todos.pop();
+    }
+    while(isDone.length > 0) {
+        isDone.pop();
+    }
     
     // Remove all todos from the html.
     // You'll have to write that function too, but we'll call it here:
@@ -70,7 +75,7 @@ function clearAllTodos(event) {
 
 function clearDoneTodos(event) {
     // Stop page from reloading on button click.
-
+    event.preventDefault();
     /*
         Find which todos need to be removed and remove them from BOTH arrays.
         If you did it right when making them, you should be able to check the
@@ -120,9 +125,11 @@ function toggleDone(event) {
 
 }
 
-function removeAllChildrenOfOl() {
+function removeAllChildrenOfOl(ol) {
     // Grab the ol.
-
+    while(ol.hasChildNodes()) {
+        ol.removeChild(ol.firstChild);
+    }
 
     // Remove all its children.
     // The way I like to do that is to continue to remove children as long as
@@ -131,4 +138,3 @@ function removeAllChildrenOfOl() {
     // There are other ways too, though. Feel free to poke around.
 
 }
-
