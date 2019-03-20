@@ -28,7 +28,7 @@ function init() {
         .addEventListener('click', clearAllTodos);
     
     showTime();
-    countdown();
+    // countdown();
 }
 
 function addTodo(event) {
@@ -186,19 +186,19 @@ function showTime(){
     
 }
 
-function countdown () {
-    let timeLeft = 30;
-    let elem = document.getElementById('some_div');
+// function countdown () {
+//     let timeLeft = 30;
+//     let elem = document.getElementById('some_div');
 
-    let timerId = setInterval(countdown, 1000);
+//     let timerId = setInterval(countdown, 1000);
 
-    function countdown() {
-        if (timeLeft == 0) {
-        clearTimeout(timerId);
-        doSomething();
-        } else {
-        elem.innerHTML = timeLeft + ' sec';
-        timeLeft--;
-        }
-    }
-}
+//     function countdown() {
+//         if (timeLeft == 0) {
+//         clearTimeout(timerId);
+//         doSomething();
+//         } else {
+//         elem.innerHTML = timeLeft + ' sec';
+//         timeLeft--;
+//         }
+//     }
+// }
