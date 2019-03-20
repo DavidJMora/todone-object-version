@@ -28,6 +28,7 @@ function init() {
         .addEventListener('click', clearAllTodos);
     
     showTime();
+    countdown();
 }
 
 function addTodo(event) {
@@ -183,4 +184,21 @@ function showTime(){
     
     setTimeout(showTime, 1000);
     
+}
+
+function countdown () {
+    let timeLeft = 30;
+    let elem = document.getElementById('some_div');
+
+    let timerId = setInterval(countdown, 1000);
+
+    function countdown() {
+        if (timeLeft == 0) {
+        clearTimeout(timerId);
+        doSomething();
+        } else {
+        elem.innerHTML = timeLeft + ' sec';
+        timeLeft--;
+        }
+    }
 }
