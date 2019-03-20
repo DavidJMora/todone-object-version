@@ -36,7 +36,7 @@ function addTodo(event) {
     const todoUserInput = document.querySelector('#new-todo').value;
 
     // Put the todo and its "done-ness" in their respective arrays.
-    if(todoUserInput !== '') {
+    if(todoUserInput !== '' && todos.includes(todoUserInput) === false) {
         todos.push(todoUserInput);
         isDone.push(false); 
     
@@ -52,6 +52,8 @@ function addTodo(event) {
     // Put our new element on the list part of our page!
     const addingToOl = document.querySelector('#todo-list');
     addingToOl.appendChild(newLi);
+    } else {
+        document.querySelector('#error-message').innerText = "Please check to make sure todo list doesn't already have the item you are trying to enter.";
     }
 
     // Clear the input field of all text.
