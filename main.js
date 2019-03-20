@@ -36,24 +36,26 @@ function addTodo(event) {
     const todoUserInput = document.querySelector('#new-todo').value;
 
     // Put the todo and its "done-ness" in their respective arrays.
-    todos.push(todoUserInput);
-    isDone.push(false); 
-    
-    // Clear the input field of all text.
-    document.querySelector('#new-todo').value = '';
+    if(todoUserInput !== '') {
+        todos.push(todoUserInput);
+        isDone.push(false); 
     
     // Create a new html element and put our new todo's text in there.
     const newLi = document.createElement('li');
     newLi.innerText = todoUserInput;
-
+    
     // Add an event listener on the newly created html element to launch
     // `toggleDone` when it's clicked.
     
     newLi.addEventListener('click', toggleDone);
-
+    
     // Put our new element on the list part of our page!
     const addingToOl = document.querySelector('#todo-list');
     addingToOl.appendChild(newLi);
+    }
+
+    // Clear the input field of all text.
+    document.querySelector('#new-todo').value = '';
 }
 
 
@@ -110,7 +112,9 @@ function clearDoneTodos(event) {
     newLi.innerText = todos[i];
     const appendElement = document.querySelector('#todo-list');
     appendElement.appendChild(newLi);
+    newLi.addEventListener('click', toggleDone);
     }
+
 }
 
 function toggleDone(event) {
