@@ -26,6 +26,8 @@ function init() {
     // When they click the clear all todos button, run `clearAllTodos`.
     document.querySelector('#clear-all-todos')
         .addEventListener('click', clearAllTodos);
+    
+    showTime();
 }
 
 function addTodo(event) {
@@ -52,6 +54,7 @@ function addTodo(event) {
     // Put our new element on the list part of our page!
     const addingToOl = document.querySelector('#todo-list');
     addingToOl.appendChild(newLi);
+    document.querySelector('#error-message').innerText = '';
     }else if(todoUserInput === '') {
         document.querySelector('#error-message').innerText = '';
     }else if(todos.includes(todoUserInput) === true) {
@@ -153,4 +156,31 @@ function removeAllChildrenOfOl() {
         removeAll.removeChild(removeAll.firstChild);
     }
 
+}
+
+function showTime(){
+    let date = new Date();
+    let h = date.getHours(); // 0 - 23
+    let m = date.getMinutes(); // 0 - 59
+    let s = date.getSeconds(); // 0 - 59
+    let session = "AM";
+    
+    if(h === 0){
+        h = 12;
+    }
+    
+    if(h >= 12){
+        session = "PM";
+    }
+    
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    const time = h + ":" + m + ":" + s + " " + session;
+    document.getElementById("my-clock-display").innerText = time;
+    document.getElementById("my-clock-display").textContent = time;
+    
+    setTimeout(showTime, 1000);
+    
 }
