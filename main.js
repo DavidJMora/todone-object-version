@@ -130,18 +130,18 @@ function toggleDone(event) {
     
     // Grab the HTML element that was clicked.
     // If you don't know, the event parameter has what you need... somewhere.
-    const elementInnerText = event.target;
+    const selectedLi = event.target;
 
     // Find the index of the array that this todo resides in. There are a couple
     // ways to do this, and I'm sure you'll figure one out!
-    const index = todos.indexOf(elementInnerText.innerText);
+    const index = todos.indexOf(selectedLi.innerText);
 
     // *IF* it's not done yet, apply strikethrough. Otherwise, take that
     // strikethrough away!
     // Toggle the "done-ness" of the same todo, using the isDone array.
     
     isDone[index] = !isDone[index];
-    elementInnerText.style.textDecoration = !isDone[index] ? 'none' : "line-through";
+    selectedLi.style.textDecoration = !isDone[index] ? 'none' : "line-through";
     
 }
 
