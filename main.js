@@ -8,7 +8,7 @@ For example, isDone[3] would hold the "done-ness" information for todos[3].
 */
 
 let todos = [];
-let isDone = [];
+
 
 // When the html finishes loading, launch `init`.
 window.onload = init;
@@ -40,8 +40,7 @@ function addTodo(event) {
 
     // Put the todo and its "done-ness" in their respective arrays.
     if(todoUserInput !== '' && todos.includes(todoUserInput) === false) {
-        todos.push(todoUserInput);
-        isDone.push(false); 
+        todos.push({listItem: todoUserInput, isDone: false});
     
     // Create a new html element and put our new todo's text in there.
     const newLi = document.createElement('li');
@@ -58,7 +57,7 @@ function addTodo(event) {
     document.querySelector('#error-message').innerText = '';
     }else if(todoUserInput === '') {
         document.querySelector('#error-message').innerText = '';
-    }else if(todos.includes(todoUserInput) === true) {
+    }else if(todos[i].includes(todoUserInput) === true) {
         document.querySelector('#error-message').innerText = "Please check to make sure todo list doesn't already have the item you are trying to enter.";
     }
     // Clear the input field of all text.
@@ -73,9 +72,6 @@ function clearAllTodos(event) {
     // Remove all todos from BOTH arrays.
     while(todos.length > 0) {
         todos.pop();
-    }
-    while(isDone.length > 0) {
-        isDone.pop();
     }
     
     // Remove all todos from the html.
@@ -94,13 +90,14 @@ function clearDoneTodos(event) {
         indices!
 
         One way to do this is to build up a new array. Give that a try first!
-
-    */
-    while(isDone.includes(true)) {
-        const index = isDone.indexOf(true);
-        todos.splice(index, 1);
-        isDone.splice(index, 1);
+        */
+    newTodo = [];
+    for(let i = 0; i < todos.length; i++) {
+        if(todos[i].isDone === false) {
+            newTodo.push(todos[i]);
+        }
     }
+    todos = newTodo;
     /*
         Now remove the done todos from the html.
 
@@ -113,13 +110,27 @@ function clearDoneTodos(event) {
 
         Your call.
     */
-    removeAllChildrenOfOl();
-    for(let i = 0; i < todos.length; i++) {
-    const newLi = document.createElement('li');
-    newLi.innerText = todos[i];
-    const appendElement = document.querySelector('#todo-list');
-    appendElement.appendChild(newLi);
-    newLi.addEventListener('click', toggleDone);
+    // removeAllChildrenOfOl();
+    // for(let i = 0; i < todos.length; i++) {
+    // const newLi = document.createElement('li');
+    // newLi.innerText = todos[i];
+    // const appendElement = document.querySelector('#todo-list');
+    // appendElement.appendChild(newLi);
+    // newLi.addEventListener('click', toggleDone);
+    // }
+
+    // alternate version to get rid of completed items on the HTML
+    // instead of deleting everything from the list and repopulating
+    // it targets any childNode that has the text decoration of line-through
+    const ol = document.querySelector('#todo-list');
+    const lis = ol.childNodes;
+    let i = 0;
+    while(i < lis.length) {
+        if(lis[i].style.textDecoration === "line-through") {
+            lis[i].remove();
+        } else {
+            i++
+        }
     }
 
 }
@@ -134,15 +145,12 @@ function toggleDone(event) {
 
     // Find the index of the array that this todo resides in. There are a couple
     // ways to do this, and I'm sure you'll figure one out!
-    const index = todos.indexOf(selectedLi.innerText);
-
-    // *IF* it's not done yet, apply strikethrough. Otherwise, take that
-    // strikethrough away!
-    // Toggle the "done-ness" of the same todo, using the isDone array.
-    
-    isDone[index] = !isDone[index];
-    selectedLi.style.textDecoration = !isDone[index] ? 'none' : "line-through";
-    
+    for(let i = 0; i < todos.length; i++) {
+        if(selectedLi.innerText === todos[i].listItem) {
+            todos[i].isDone = !todos[i].isDone;
+            selectedLi.style.textDecoration = todos[i].isDone ? 'line-through' : "none";
+        }  
+    }
 }
 
 function removeAllChildrenOfOl() {
